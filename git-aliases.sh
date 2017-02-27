@@ -14,6 +14,6 @@ alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset
 
 function fix {
   git add $1
-  git commit -m 'updated $1'
+  git commit -m "updated $1"
 }
 
