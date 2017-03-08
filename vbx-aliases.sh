@@ -1,8 +1,8 @@
 
-
 alias v=vboxmanage
-alias vl='vboxmanage list vms'
 alias vs='vboxmanage startvm'
+alias vl='vm-list'
+alias va='vboxmanage list vms'
 alias vr='vboxmanage list runningvms'
 
 function vh {

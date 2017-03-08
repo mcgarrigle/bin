@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+def list(s)
+  vms = %x[vboxmanage list #{s}]
+  vms.lines.map {|s| /"(.+)" /.match(s); $1 }
+end
+
+all = Hash[list(:vms).map {|k| [k,"-"] }]
+
+list(:runningvms).each {|k| all[k] = "r" }
+
+all.each {|k,v| puts "#{v} #{k}" }
