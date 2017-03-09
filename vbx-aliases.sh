@@ -1,6 +1,5 @@
 
 alias v='vboxmanage'
-alias vs='vboxmanage startvm'
 alias vl='vm-list'
 alias va='vboxmanage list vms'
 alias vr='vboxmanage list runningvms'
