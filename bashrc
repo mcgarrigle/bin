@@ -8,4 +8,5 @@ export EDITOR=vim
 
 source "git-aliases.sh"
 source "vbx-aliases.sh"
+source "ruby-aliases.sh"
 
