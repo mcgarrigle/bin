@@ -12,8 +12,16 @@ function vh {
   vboxmanage controlvm "$1" acpipowerbutton
 }
 
-function vd {
+function vx {
   vboxmanage controlvm "$1" poweroff
-  sleep 5
-  vboxmanage unregistervm "$1" --delete
+}
+
+function vd {
+  read -p "Are you sure? " -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    vboxmanage controlvm "$1" poweroff
+    sleep 5
+    vboxmanage unregistervm "$1" --delete
+  fi
 }
