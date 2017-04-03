@@ -1,12 +1,41 @@
 #!/usr/bin/env ruby
 
-def list(s)
+def value(s)
+  case s
+  when /^"(.*)"$/ then return $1
+  else return s.to_i
+  end
+end
+
+def vmlist(s)
   vms = %x[vboxmanage list #{s}]
   vms.lines.map {|s| /(".+")/.match(s); $1 }
 end
 
-all = Hash[list(:vms).map {|k| [k,"-"] }]
+def vminfo(name)
+  info = %x[vboxmanage showvminfo "#{name}" --machinereadable]
+  vm = info.lines.map {|s| a = s.chomp.split("=",2); [a[0], value(a[1])] }
+  Hash[vm]
+end
 
-list(:runningvms).each {|k| all[k] = "r" }
+def list
+  all = Hash[vmlist(:vms).map {|k| [k,"-"] }]
 
-all.each {|k,v| puts "#{v} #{k}" }
+  vmlist(:runningvms).each {|k| all[k] = "r" }
+
+  all.each {|k,v| puts "#{v} #{k}" }
+end
+
+def info(name)
+  vm = vminfo(name)
+  attributes = %w[name memory macaddress1 macaddress2 macaddress3]
+  attributes.each do |a|
+    puts "#{a}: #{vm[a]}" if vm[a]
+  end
+end
+
+if ARGV[0]
+  info ARGV[0]
+else
+  list
+end
