@@ -1,4 +1,5 @@
 
-alias pp='puppet apply --verbose /etc/puppet/manifests/site.pp'
-alias pd='puppet apply --debug --verbose /etc/puppet/manifests/site.pp'
+alias pp='puppet apply --verbose ~/site.pp'
+alias pd='puppet apply --debug --verbose ~/site.pp'
+alias pl='puppet parser validate'
 
