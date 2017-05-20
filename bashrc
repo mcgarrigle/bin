@@ -8,6 +8,7 @@ export EDITOR=vim
 
 source "git-aliases.sh"
 source "ruby-aliases.sh"
+source "vbx-aliases.sh"
 source "puppet-aliases.sh"
 
 proxy=http://127.0.0.1:9090

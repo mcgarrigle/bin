@@ -1,4 +1,10 @@
 
+export OS=$(uname)
+
+if [[ "$OS" == "Darwin" ]]; then
+  export PATH=$PATH:/Applications/VirtualBox.app/Contents/MacOS
+fi
+
 alias v='vboxmanage'
 alias vl='vm-list'
 alias va='vboxmanage list vms'
