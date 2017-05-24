@@ -23,9 +23,9 @@ function vx {
 }
 
 function vd {
-  read -p "Are you sure? " -n 1 -r
+  read -p "Are you sure? " -r
   echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ $REPLY == 'yes' ]]; then
     vboxmanage controlvm "$1" poweroff
     sleep 5
     vboxmanage unregistervm "$1" --delete
