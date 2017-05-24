@@ -12,6 +12,7 @@ source "vbx-aliases.sh"
 source "puppet-aliases.sh"
 
 proxy=http://127.0.0.1:9090
+proxy=http://proxy.intra.bt.com:8080
 
 function p0 {
   unset http_proxy

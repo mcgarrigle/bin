@@ -5,6 +5,10 @@ if [[ "$OS" == "Darwin" ]]; then
   export PATH=$PATH:/Applications/VirtualBox.app/Contents/MacOS
 fi
 
+if [[ "$OS" == "MINGW64_NT-6.3" ]]; then
+  export PATH=$PATH:/c/Program\ Files/Oracle/VirtualBox  
+fi
+
 alias v='vboxmanage'
 alias vl='vm-list'
 alias va='vboxmanage list vms'
