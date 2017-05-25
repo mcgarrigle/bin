@@ -11,7 +11,9 @@ source "ruby-aliases.sh"
 source "vbx-aliases.sh"
 source "puppet-aliases.sh"
 
-proxy=http://127.0.0.1:9090
+if [ -z "$proxy" ]; then
+  proxy=http://127.0.0.1:9090
+fi
 
 function p0 {
   unset http_proxy
