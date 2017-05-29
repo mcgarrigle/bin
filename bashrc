@@ -25,3 +25,6 @@ function p1 {
   export https_proxy=$proxy
 }
 
+if [[ "$OS" == "Darwin" ]]; then
+  source bashrc-macos
+fi
