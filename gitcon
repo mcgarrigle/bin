@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'inifile'
+require 'pp'
+
+home = ENV['HOME']
+
+ini = IniFile.load("#{home}/.gitconfig")
+
+user = ini['user']
+
+puts "git config --global user.name '#{user['name']}'"
+puts "git config --global user.email '#{user['email']}'"
