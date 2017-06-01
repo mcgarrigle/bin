@@ -33,5 +33,7 @@ function vd {
     vboxmanage controlvm "$1" poweroff
     sleep 5
     vboxmanage unregistervm "$1" --delete
+  else
+    echo "delete aborted - answer 'yes' to confirm"
   fi
 }
