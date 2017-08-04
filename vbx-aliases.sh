@@ -37,3 +37,8 @@ function vd {
     echo "delete aborted - answer 'yes' to confirm"
   fi
 }
+
+function vv {
+  vboxmanage showvminfo "$1" --machinereadable
+}
+
