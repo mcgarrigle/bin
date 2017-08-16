@@ -42,3 +42,8 @@ function vv {
   vboxmanage showvminfo "$1" --machinereadable
 }
 
+function vnr {
+  vboxmanage natnetwork stop --netname "$1"
+  vboxmanage natnetwork start --netname "$1"
+}
+
