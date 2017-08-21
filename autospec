@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+def time(files)
+  list = files.map {|path| [path, File.ctime(path)] }
+  Hash[list]
+end
+
+def libs_matching tests
+  tests.map do |path|
+    test = File.basename(path)
+    lib  = test.sub('_spec.rb','.rb')
+    "lib/#{lib}"
+  end
+end
+
+def trigger path
+  if path.match(/^spec/)
+    testfile = path
+  else
+    testname = File.basename(path).sub('.rb', '_spec.rb')
+    testfile = File.join('spec', testname)
+  end
+  puts "rspec #{testfile}"
+  system "rspec #{testfile}"
+end
+
+def watch
+  @now = time(@files)
+  @now.keys.each do |path|
+    trigger(path) if @now[path] != @last[path]
+  end
+  @last = @now
+end
+
+specs = Dir.glob("spec/*_spec.rb")
+libs  = libs_matching(specs)
+
+@files  = specs + libs
+@last   = time(@files)
+
+while true
+  watch 
+  sleep 3 
+end
+
