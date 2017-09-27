@@ -28,3 +28,5 @@ function p1 {
 if [[ "$OS" == "Darwin" ]]; then
   source bashrc-macos
 fi
+
+unset TMOUT
