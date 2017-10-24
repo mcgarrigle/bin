@@ -57,9 +57,9 @@ function ssh {
 
 function scp {
   if [ -e ssh.config ]; then
-    scp -F ssh.config $@
+    env scp -F ssh.config $@
   else
-    scp $@
+    env scp $@
   fi
 }
 
