@@ -25,8 +25,16 @@ function p1 {
   export https_proxy=$proxy
 }
 
+function contains {
+  [ -z "${2##*$1*}" ]
+}
+
 if [[ "$OS" == "Darwin" ]]; then
   source bashrc-macos
+fi
+
+if contains("$OS", "MINGW"); then
+  source bashrc-git
 fi
 
 unset TMOUT

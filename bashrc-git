@@ -1,0 +1,10 @@
+
+# alias ssh="ssh -F ssh_config"
+# alias scp="scp -F ssh_config"
+
+# function ssh-copy-id {
+  # host=$1
+  # key=$(cat ~/.ssh/id_rsa.pub)
+  # ssh $host "mkdir -m 700 ~/.ssh; echo '$key' > ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
+# }
+

@@ -47,3 +47,19 @@ function vnr {
   vboxmanage natnetwork start --netname "$1"
 }
 
+function ssh {
+  if [ -e ssh.config ]; then
+    env ssh -F ssh.config $@
+  else
+    env ssh $@
+  fi
+}
+
+function scp {
+  if [ -e ssh.config ]; then
+    scp -F ssh.config $@
+  else
+    scp $@
+  fi
+}
+
