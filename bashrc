@@ -33,8 +33,12 @@ if [[ "$OS" == "Darwin" ]]; then
   source bashrc-macos
 fi
 
-if contains("$OS", "MINGW"); then
+if contains "MINGW" "$OS"; then
+  OS="MINGW"
   source bashrc-git
 fi
 
+echo $OS
+
 unset TMOUT
+
