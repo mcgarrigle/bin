@@ -38,7 +38,5 @@ if contains "MINGW" "$OS"; then
   source bashrc-git
 fi
 
-echo $OS
-
 unset TMOUT
 
