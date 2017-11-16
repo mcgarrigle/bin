@@ -26,6 +26,10 @@ function vx {
   vboxmanage controlvm "$1" poweroff
 }
 
+function vg {
+  vboxmanage startvm "$1" --type separate
+}
+
 function vd {
   read -p "Are you sure? " -r
   echo
