@@ -14,21 +14,31 @@ alias vl='vm-list'
 alias va='vboxmanage list vms'
 alias vr='vboxmanage list runningvms'
 
+# vbox start
+
 function vs {
   vboxmanage startvm "$1" --type headless
 }
+
+# vbox halt
 
 function vh {
   vboxmanage controlvm "$1" acpipowerbutton
 }
 
+# vbox exit
+
 function vx {
   vboxmanage controlvm "$1" poweroff
 }
 
-function vg {
+# vbox console
+
+function vc {
   vboxmanage startvm "$1" --type separate
 }
+
+# vbox delete
 
 function vd {
   read -p "Are you sure? " -r
@@ -42,9 +52,13 @@ function vd {
   fi
 }
 
+# vbox view
+
 function vv {
   vboxmanage showvminfo "$1" --machinereadable
 }
+
+# vbox network restart
 
 function vnr {
   vboxmanage natnetwork stop --netname "$1"
