@@ -20,8 +20,8 @@ def trigger path
     testname = File.basename(path).sub('.rb', '_spec.rb')
     testfile = File.join('spec', testname)
   end
-  puts "rspec #{testfile}"
-  system "rspec #{testfile}"
+  puts "---------------------------------------------------"
+  system "rspec -I lib -f d #{testfile}"
 end
 
 def watch
