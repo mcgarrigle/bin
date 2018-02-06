@@ -14,5 +14,6 @@ au BufNewFile,BufRead *.lab set filetype=ruby
 " if you have problems check the ownership/permissions of ~/.viminfo
 
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd Filetype gitcommit setlocal spell textwidth=72
 endif
