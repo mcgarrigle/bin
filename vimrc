@@ -21,7 +21,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" strip trailing from puppet files
+" puppet settings
 
+autocmd BufNewFile,BufRead *.pp set filetype=puppet
 autocmd BufWritePre *.pp :%s/\s\+$//e
+autocmd Filetype puppet setlocal textwidth=70
 
