@@ -10,7 +10,7 @@ alias gp='git push'
 alias co='git checkout'
 alias gd='git diff'
 alias gr='git remote -v'
-alias gl='git log --graph --pretty=oneline --abbrev-commit'
+alias gl='git log --pretty=oneline --abbrev-commit'
 alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
 
 function fix {
