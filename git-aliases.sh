@@ -18,3 +18,8 @@ function fix {
   git commit -m "updated $1"
 }
 
+function fixup {
+  git reset --soft HEAD~1
+  git commit --amend -C HEAD
+}
+
