@@ -1,7 +1,7 @@
 
 # alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
-function tree {
+function mactree {
   if [ "$1" == "-d" ]; then
     find . -type d -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
   else
