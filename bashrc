@@ -1,4 +1,6 @@
 
+set -o vi
+
 alias ll="ls -la"
 alias vi=vim
 alias f="find . -name"

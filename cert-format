@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+cert = $stdin.read.scan(/.{1,64}/).join("\n")
+
+puts "-----BEGIN CERTIFICATE-----"
+puts cert
+puts "-----END CERTIFICATE-----"
+
