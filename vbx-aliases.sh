@@ -88,3 +88,6 @@ function ssh-copy-keys {
   scp -p ~/.ssh/id_rsa* $host:~/.ssh
 }
 
+function ai {
+  ssh -i ~/.ssh/personal.pem ec2-user@$1
+}
