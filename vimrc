@@ -1,4 +1,7 @@
+execute pathogen#infect()
 syntax on
+filetype plugin indent on
+
 set tabstop=8
 set softtabstop=2
 set shiftwidth=2
@@ -26,4 +29,6 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd BufNewFile,BufRead *.pp set filetype=puppet
 autocmd BufWritePre *.pp :%s/\s\+$//e
 autocmd Filetype puppet setlocal textwidth=70
+" autocmd Filetype puppet setlocal syntax on
 
+set background=dark
