@@ -1,8 +1,10 @@
 #!/bin/bash
 
-DATE="$(curl --head --silent google.com | grep Date: | cut -d' ' -f3-7)"
+HEAD=$(curl --head --silent google.com)
 
-echo $DATE
-
-date -s "$DATE"
-
+if [ $? = "0" ]; then
+  DATE=$(echo "$HEAD" | grep Date: | cut -d' ' -f3-7)
+  date -s "$DATE"
+else
+  echo "date not found"
+fi
