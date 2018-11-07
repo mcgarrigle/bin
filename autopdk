@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+def time(files)
+  list = files.map {|path| [path, File.ctime(path)] }
+  Hash[list]
+end
+
+def classes_matching specs
+  specs.map do |path|
+    test = File.basename(path)
+    klass = test.sub('_spec.rb','.pp')
+    "manifests/#{klass}"
+  end
+end
+
+def trigger path
+  if path.match(/^spec/)
+    testfile = path
+  else
+    testname = File.basename(path).sub('.pp', '_spec.rb')
+    testfile = File.join('spec','classes', testname)
+  end
+  puts "---------------------------------------------------"
+  system "pdk test unit --tests=#{testfile}"
+end
+
+def watch
+  @now = time(@files)
+  @now.keys.each do |path|
+    trigger(path) if @now[path] != @last[path]
+  end
+  @last = @now
+end
+
+specs   = Dir.glob("spec/**/*_spec.rb")
+classes = classes_matching(specs)
+
+@files  = specs + classes
+@last   = time(@files)
+
+while true
+  watch 
+  sleep 3 
+end
+
