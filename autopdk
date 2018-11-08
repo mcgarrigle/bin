@@ -20,7 +20,9 @@ def trigger path
     testname = File.basename(path).sub('.pp', '_spec.rb')
     testfile = File.join('spec','classes', testname)
   end
-  puts "---------------------------------------------------"
+  puts "\n--- validate --------------------------------------"
+  system "pdk validate #{path}"
+  puts "\n--- rspec -----------------------------------------"
   system "pdk test unit --tests=#{testfile}"
 end
 
