@@ -3,6 +3,8 @@ alias ll="ls -la"
 alias vi=vim
 alias f="find . -name"
 
+alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
+
 export PATH="/usr/local/bin:$HOME/bin:$PATH:bin"
 export EDITOR=vim
 
