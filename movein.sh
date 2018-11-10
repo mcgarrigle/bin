@@ -1,3 +1,6 @@
+#
+# invoke with:
+# curl -L http://bit.ly/shellin | bash
 
 yum install -y vim git tmux
 
