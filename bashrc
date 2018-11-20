@@ -8,13 +8,11 @@ alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
 export PATH="/usr/local/bin:$HOME/bin:$PATH:bin"
 export EDITOR=vim
 
-source "git-aliases.sh"
-source "ruby-aliases.sh"
-source "vbx-aliases.sh"
-source "puppet-aliases.sh"
-source "terraform-aliases.sh"
+for app in git ruby vbx puppet terraform; do
+  source "aliases-${app}.sh"
+done
 
-if [ -z "$proxy" ]; then
+if [ -z "${proxy}" ]; then
   export proxy="http://127.0.0.1:9090"
 fi
 
@@ -32,14 +30,15 @@ function contains {
   [ -z "${2##*$1*}" ]
 }
 
-if [[ "$OS" == "Darwin" ]]; then
-  source bashrc-macos
+OS=$(uname -s)
+
+TAG=$(echo "$OS" | awk '{print tolower($0)}')
+
+if contains "MINGW" "$TAG"; then
+  TAG="MINGW"
 fi
 
-if contains "MINGW" "$OS"; then
-  OS="MINGW"
-  source bashrc-git
-fi
+source "bashrc-os-${TAG}"
 
 unset TMOUT
 

@@ -9,7 +9,8 @@ def roll
   5.times.map { (rand(6)+1).to_s }.join
 end
 
-hash = DATA.readlines.map {|s| s.split }.to_h
+list = DATA.readlines.map {|s| s.split }
+hash = Hash[list]
 
 phrase = 4.times.map { hash[roll] }.join(' ')
 
