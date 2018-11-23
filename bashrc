@@ -1,6 +1,6 @@
 
 alias ll="ls -la"
-alias vi=vim
+alias vi="vim"
 alias f="find . -name"
 
 alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
@@ -32,13 +32,13 @@ function contains {
 
 OS=$(uname -s)
 
-TAG=$(echo "$OS" | awk '{print tolower($0)}')
+PLATFORM=$(echo "$OS" | awk '{print tolower($0)}')
 
-if contains "MINGW" "$TAG"; then
-  TAG="MINGW"
+if contains "mingw" "$PLATFORM"; then
+  PLATFORM="mingw"
 fi
 
-source "bashrc-os-${TAG}"
+source "bashrc-os-${PLATFORM}"
 
 unset TMOUT
 
