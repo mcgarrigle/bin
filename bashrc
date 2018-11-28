@@ -5,7 +5,7 @@ alias f="find . -name"
 
 alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
 
-export PATH="/usr/local/bin:$HOME/bin:$PATH:bin"
+export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 
 for app in git ruby vbx puppet terraform; do
