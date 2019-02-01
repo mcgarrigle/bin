@@ -84,7 +84,7 @@ function scp {
 function ssh-copy-keys {
   host="$1"
   pkey="$(cat ~/.ssh/id_rsa.pub)"
-  ssh $host "mkdir -p -m 700 ~/.ssh; echo '$pkey' > ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
+  ssh $host "mkdir -p -m 700 ~/.ssh; echo '$pkey' > ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys; restorecon -r ~/.ssh"
   scp -p ~/.ssh/id_rsa* $host:~/.ssh
 }
 
