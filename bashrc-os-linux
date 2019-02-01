@@ -1,0 +1,2 @@
+
+alias rpm-keys="rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n'"
