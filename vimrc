@@ -30,4 +30,7 @@ autocmd BufWritePre *.pp :%s/\s\+$//e
 autocmd Filetype puppet setlocal textwidth=70
 " autocmd Filetype puppet setlocal syntax on
 
+autocmd BufNewFile,BufRead *.py set filetype=python
+autocmd Filetype python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
 set background=dark
