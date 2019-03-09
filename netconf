@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
+import sys
 import re
 import subprocess
+import optparse
 
 class Interface:
 
@@ -18,14 +20,19 @@ class NetworkLinks:
         self.links = map(lambda s: self.to_interface(s), links.splitlines())
 
     def to_interface(self, s):
-        print(s)
         r = re.match('\d+: (\w+).*link/\w+ ([0-9a-f:]+)', s)
         i = Interface()
         i.name = r.group(1)
         i.mac  = r.group(2)
         return i
 
-l = NetworkLinks()
-for i in l.links:
-    print(i.name)
-    print(i.mac)
+def main(command):
+    l = NetworkLinks()
+    for i in l.links:
+        print(i.name)
+        print(i.mac)
+        
+
+if __name__ == "__main__":
+    command = sys.argv[1]
+    main(command)
