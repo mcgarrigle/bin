@@ -1,2 +1,17 @@
+#!/bin/bash
+# vim: set ft=bash syntax=on
 
 alias rpm-keys="rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n'"
+
+function td {
+  sudo kill $(cat /var/run/openvpn.pid)
+  sudo rm -f /var/run/openvpn.pid
+}
+
+function tu {
+  pushd ~/.openvpn > /dev/null
+  sudo openvpn --daemon vpn \
+    --config openvpn.config \
+    --writepid /var/run/openvpn.pid
+  popd > /dev/null
+}
