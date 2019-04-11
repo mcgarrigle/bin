@@ -1,6 +1,11 @@
 syntax on
 filetype plugin indent on
 
+" MacBook Pro (touchpad) and iPad keyboards do not have an escape key
+" so I remap it to '§'
+
+imap § <ESC>
+
 set tabstop=8
 set softtabstop=2
 set shiftwidth=2
