@@ -8,7 +8,7 @@ alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
 export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 
-for app in git ruby vbx puppet terraform; do
+for app in git ruby vbx puppet docker terraform; do
   source "aliases-${app}.sh"
 done
 
