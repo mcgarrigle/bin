@@ -9,9 +9,7 @@ function td {
 }
 
 function tu {
-  pushd ~/.openvpn > /dev/null
   sudo openvpn --daemon vpn \
-    --config openvpn.config \
+    --config ~/.openvpn/openvpn.config \
     --writepid /var/run/openvpn.pid
-  popd > /dev/null
 }
