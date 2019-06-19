@@ -27,6 +27,10 @@ function p1 {
   export https_proxy=$proxy
 }
 
+function i {
+  ssh -q $(grep "$1" inventory)
+}
+
 function contains {
   [ -z "${2##*$1*}" ]
 }
