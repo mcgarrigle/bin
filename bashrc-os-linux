@@ -3,6 +3,10 @@
 
 alias rpm-keys="rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n'"
 
+function kto {
+  gdb --batch-silent --pid=$$ --eval-command='call unbind_variable("TMOUT")'
+}
+
 function td {
   sudo kill $(cat /var/run/openvpn.pid)
   sudo rm -f /var/run/openvpn.pid
