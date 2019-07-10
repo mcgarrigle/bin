@@ -5,7 +5,12 @@ alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{
 
 function dr {
   image=$1; shift
-  docker run -it --rm --mount type=bind,source=$HOME,target=/root "$image" $@
+  docker run -it -P --rm --mount type=bind,source=$HOME,target=/root "$image" $@
+}
+
+function db {
+  image=$1; shift
+  docker run -d -P --rm --mount type=bind,source=$HOME,target=/root "$image" $@
 }
 
 function de {
