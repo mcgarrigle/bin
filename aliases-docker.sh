@@ -14,6 +14,6 @@ function db {
 }
 
 function de {
-  container="$2"
-  docker exec -it $1 ${container:=bash}
+  cmd="$2"
+  docker exec -it $1 ${cmd:=bash}
 }
