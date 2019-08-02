@@ -9,10 +9,15 @@ def roll
   5.times.map { (rand(6)+1).to_s }.join
 end
 
-list = DATA.readlines.map {|s| s.split }
-hash = Hash[list]
+list  = DATA.readlines.map {|s| s.split }
+hash  = Hash[list]
+words = 4.times.map { hash[roll] }
 
-phrase = 4.times.map { hash[roll] }.join(' ')
+if ARGV[0] == '-w'
+  phrase = words.map.with_index {|w,i| "#{w.capitalize}#{i}" }.join('')
+else
+  phrase = words.join(' ')
+end
 
 puts phrase
 
