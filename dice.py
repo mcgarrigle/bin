@@ -10,15 +10,18 @@ def roll():
     digits = [ str(random.randint(1, 6)) for i in range(5) ]
     return ''.join(digits)
 
+def words():
+    with open(os.path.join(ROOT, 'wordlist.txt')) as f:
+        text = f.read()
+    items = [ tuple(s.split()) for s in text.splitlines() ]
+    index = dict(items)
+    return index
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-w", "--windows", help="Make complient with typical Windows policy", action="store_true")
 args = parser.parse_args()
 
-with open(os.path.join(ROOT, 'wordlist.txt')) as f:
-    text = f.read()
-    items = [ tuple(s.split()) for s in text.splitlines() ]
-    index = dict(items)
-
+index = words()
 words = [ (index[roll()], i) for i in range(4) ]
 
 if args.windows:
