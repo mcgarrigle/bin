@@ -35,5 +35,7 @@ list_parser.add_argument("-v", "--verbose", help="more info", action="store_true
 info_parser = subparsers.add_parser('info', help='info help')
 args = parser.parse_args()
 
-if args.command == 'list':
+if args.command == None:
+    list_command()
+elif args.command == 'list':
     list_command()
