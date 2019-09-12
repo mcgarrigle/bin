@@ -8,7 +8,7 @@ def command(*cmd):
    s = subprocess.check_output(cmd)
    return s.decode('utf-8')
 
-def select(s, r):
+def select(r, s):
   m = re.search(r, s)
   if m:
       return m.group(1)
@@ -17,7 +17,7 @@ def select(s, r):
 
 def vmlist(mode):
     s = command('vboxmanage', 'list', mode)
-    vms = [select(x, '"(.*)"') for x in s.splitlines()]
+    vms = [select('"(.*)"', x) for x in s.splitlines()]
     return vms
 
 def list_command():
