@@ -1,7 +1,12 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
-string = ARGV[0].upcase
+import re
+import sys
 
-puts '%s%02d%s' % [string[0], (string.size - 2), string[-1]]
+word = sys.argv[1]
 
-puts 
+m = re.search('^(.)(.*)(.)$', word.upper())
+
+(start, middle, end) = m.groups()
+
+print(f'{start}{len(middle):02}{end}')
