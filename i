@@ -10,7 +10,7 @@ def matches(hostname, a):
 home = os.environ['HOME']
 host = sys.argv[1]
  
-m = re.search('([a-zA-Z]+)(\d+)?', host)
+m = re.search('([a-zA-Z\-]+)(\d+)?', host)
 p = list(filter(None, m.groups()))
 
 with open(os.path.join(home, ".inventory")) as f:
