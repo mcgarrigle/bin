@@ -1,6 +1,6 @@
 
 alias di='docker images'
-alias dp='docker ps'
+alias dp='docker ps -a --format "{{.ID}}:\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 function dr {
