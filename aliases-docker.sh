@@ -19,7 +19,24 @@ function de {
   docker exec -it $1 ${cmd:=bash}
 }
 
+# ---------------------------------------------------
+# allow dr to complete lists of images
+#
+
+_dr_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+
+  COMPREPLY=($(compgen -W "$(docker images --format '{{.Repository}}')" -- "${COMP_WORDS[1]}"))
+}
+
+complete -F _dr_completions dr
+
+# ---------------------------------------------------
 # allow de to complete lists of running containers
+#
 
 _de_completions()
 {
