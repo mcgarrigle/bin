@@ -18,3 +18,12 @@ function de {
   cmd="$2"
   docker exec -it $1 ${cmd:=bash}
 }
+
+# allow de to complete lists of running containers
+
+_de_completions()
+{
+  COMPREPLY=($(compgen -W "$(docker ps --format '{{.Names}}')" -- "${COMP_WORDS[1]}"))
+}
+
+complete -F _de_completions de
