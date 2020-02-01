@@ -27,10 +27,6 @@ function p1 {
   export https_proxy=$proxy
 }
 
-# function i {
-#   ssh -q $(grep "$1" inventory)
-# }
-
 function contains {
   [ -z "${2##*$1*}" ]
 }
@@ -47,3 +43,25 @@ source "bashrc-os-${PLATFORM}"
 
 unset TMOUT
 
+# ---------------------------------
+# s - ssh matching name in 
+#     inventory
+
+function s {
+  ssh -q "$1"
+}
+
+_s_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+
+  if [ -z "$2" ]; then
+    COMPREPLY=($(cat ~/.inventory))
+  else
+    COMPREPLY=($(grep -h $2 ~/.inventory))
+  fi
+}
+
+complete -F _s_completions s
