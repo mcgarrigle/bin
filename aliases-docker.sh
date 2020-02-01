@@ -23,6 +23,10 @@ function de {
 
 _de_completions()
 {
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+
   COMPREPLY=($(compgen -W "$(docker ps --format '{{.Names}}')" -- "${COMP_WORDS[1]}"))
 }
 
