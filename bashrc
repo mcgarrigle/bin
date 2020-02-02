@@ -48,7 +48,7 @@ unset TMOUT
 #     inventory
 
 function s {
-  ssh -q "$1"
+  ssh -q "$(grep -h -m 1 $1 ~/.inventory | cut -d' ' -f1)"
 }
 
 _s_completions()
@@ -60,7 +60,7 @@ _s_completions()
   if [ -z "$2" ]; then
     COMPREPLY=($(cat ~/.inventory))
   else
-    COMPREPLY=($(grep -h $2 ~/.inventory))
+    COMPREPLY=($(grep -h $2 ~/.inventory | cut -d' ' -f1))
   fi
 }
 
