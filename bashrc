@@ -48,19 +48,25 @@ unset TMOUT
 #     inventory
 
 function s {
-  ssh -q "$(grep -h -m 1 $1 ~/.inventory | cut -d' ' -f1)"
+  ssh -q "$(_inventory | grep -h -m 1 $1 | cut -d' ' -f1)"
 }
 
-_s_completions()
+# extract inventory file removing comment lines
+
+function _inventory {
+  sed '/^#/d' "$HOME/.inventory"
+}
+
+function _s_completions
 {
   if [ "${#COMP_WORDS[@]}" != "2" ]; then
     return
   fi
 
   if [ -z "$2" ]; then
-    COMPREPLY=($(cat ~/.inventory))
+    COMPREPLY=($(_inventory))
   else
-    COMPREPLY=($(grep -h $2 ~/.inventory | cut -d' ' -f1))
+    COMPREPLY=($(_inventory | grep -h $2 | cut -d' ' -f1))
   fi
 }
 
