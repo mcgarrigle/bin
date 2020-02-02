@@ -20,7 +20,7 @@ function de {
 }
 
 # ---------------------------------------------------
-# allow dr to complete lists of images
+# allow dr/db to complete lists of images
 #
 
 _dr_completions()
@@ -33,6 +33,7 @@ _dr_completions()
 }
 
 complete -F _dr_completions dr
+complete -F _dr_completions db
 
 # ---------------------------------------------------
 # allow de to complete lists of running containers
