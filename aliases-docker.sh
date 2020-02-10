@@ -1,21 +1,29 @@
-
-#alias dc='docker-compose'
 alias di='docker images'
 alias dp='docker ps --format "{{.ID}}:\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 function _branch {
-  git rev-parse --abbrev-ref HEAD
+  if [ -d .git ]; then
+    git rev-parse --abbrev-ref HEAD
+  fi
+}
+
+function _project_name {
+  if [ -f compose-project ]; then
+    cat compose-project
+    return
+  fi
+  if [ -n "${COMPOSE_PROJECT_NAME}" ]; then
+    echo "${COMPOSE_PROJECT_NAME}"
+    return
+  fi
+  _branch
 }
 
 function dc {
-  if [ -z "$COMPOSE_PROJECT_NAME" ]; then
-    if [ -d .git ]; then
-      export COMPOSE_PROJECT_NAME=$(_branch)
-    fi
-  fi
-  echo project = \"$COMPOSE_PROJECT_NAME\"
-  docker-compose $@
+  project=$(_project_name)
+  echo project = \"$project\"
+  COMPOSE_PROJECT_NAME=$project docker-compose $@
 }
 
 function dr {
