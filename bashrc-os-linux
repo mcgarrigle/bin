@@ -13,7 +13,11 @@ function td {
 }
 
 function tu {
-  sudo openvpn --daemon vpn \
-    --config $HOME/.openvpn/openvpn.config \
-    --writepid /var/run/openvpn.pid
+  if ip link | grep -qP '^\d: tun\d:'; then
+    echo 'the tunnel is already up'
+  else
+    sudo openvpn --daemon vpn \
+      --config $HOME/.openvpn/openvpn.config \
+      --writepid /var/run/openvpn.pid
+  fi
 }
