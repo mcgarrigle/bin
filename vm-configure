@@ -26,9 +26,9 @@ function configure_docker {
 }
 
 function configure_vim {
-  git clone git@github.com:tpope/vim-pathogen.git ~/.vim
+  git clone https://github.com/tpope/vim-pathogen.git ~/.vim
   mkdir ~/.vim/bundle
-  git clone git@github.com:vim-airline/vim-airline.git ~/.vim/bundle/airline
+  git clone https://github.com/vim-airline/vim-airline.git ~/.vim/bundle/airline
   echo "execute pathogen#infect()" >> ~/bin/vimrc
 }
 
@@ -40,4 +40,3 @@ cmd="configure_$1"
 shift
 
 $cmd $@
-
