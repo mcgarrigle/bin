@@ -44,6 +44,17 @@ source "bashrc-os-${PLATFORM}"
 unset TMOUT
 
 # ---------------------------------
+# v - vim with file searching
+
+_v_completions() {
+  COMPREPLY=($(find . -type f | grep "$2"))
+}
+
+complete -o filenames -o nospace -o bashdefault -F _v_completions v
+
+alias v=vim
+
+# ---------------------------------
 # s - ssh matching name in 
 #     inventory
 
