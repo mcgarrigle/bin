@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import random
+
+c = ["[Blue]   Geography",
+     "[Pink]   Entertainment",
+     "[Yellow] History",
+     "[Brown]  Art & Literature",
+     "[Green]  Science & Nature",
+     "[Orange] Sports & Leisure"]
+
+r = random.choice(c)
+print(r)
