@@ -17,6 +17,17 @@ if [ -z "${proxy}" ]; then
   export proxy="http://127.0.0.1:9090"
 fi
 
+# change to directory that exists somewhere rooted
+# at $HOME
+
+function _dir_below {
+  find $HOME -type d -name "$1" 2> /dev/null | head -1
+}
+
+function c {
+  cd $(_dir_below "$1")
+}
+
 function p0 {
   unset http_proxy
   unset https_proxy
