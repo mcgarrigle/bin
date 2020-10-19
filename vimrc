@@ -12,6 +12,11 @@ set shiftwidth=2
 set expandtab
 set smarttab
 
+set path+=**
+set wildmenu
+set wildignore+=**/*.pyc
+set hidden
+
 " set ai
 " set si
 " au BufNewFile,BufRead *.etl set filetype=ruby
@@ -41,3 +46,9 @@ autocmd Filetype python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 set number 
 " set relativenumber 
 set background=dark
+
+execute pathogen#infect()
+
+execute pathogen#infect()
+
+execute pathogen#infect()
