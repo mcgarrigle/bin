@@ -46,9 +46,3 @@ autocmd Filetype python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 set number 
 " set relativenumber 
 set background=dark
-
-execute pathogen#infect()
-
-execute pathogen#infect()
-
-execute pathogen#infect()
