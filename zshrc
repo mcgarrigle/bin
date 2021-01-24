@@ -1,6 +1,7 @@
 
 export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
+export CLICOLOR=1
 
 alias ll="ls -la"
 alias vi="vim"
