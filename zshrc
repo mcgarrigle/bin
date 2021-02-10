@@ -6,6 +6,7 @@ export CLICOLOR=1
 alias ll="ls -la"
 alias vi="vim"
 alias f="find . -name"
+alias scrub="clear && printf '\033[3J'"
 
 alias g='git'
 alias gs='git status'
@@ -22,6 +23,8 @@ alias gl="git --no-pager log --pretty=format:'%C(bold)%h %ci %C(magenta)%ae %C(c
 alias gll="git --no-pager log --pretty=format:'%C(bold)%h %ci %C(magenta)%ae %C(cyan)%s%C(reset)' --abbrev-commit; echo"
 alias glt='git --no-pager log --pretty=oneline --abbrev-commit --max-count=20'
 alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
+
+eval $(/opt/homebrew/bin/brew shellenv)
 
 function fix {
   git add $1
