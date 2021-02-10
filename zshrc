@@ -6,7 +6,7 @@ export CLICOLOR=1
 alias ll="ls -la"
 alias vi="vim"
 alias f="find . -name"
-alias scrub="clear && printf '\033[3J'"
+alias cls="clear && printf '\033[3J'"
 
 alias g='git'
 alias gs='git status'

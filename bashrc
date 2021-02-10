@@ -2,7 +2,7 @@
 alias ll="ls -la"
 alias vi="vim"
 alias f="find . -name"
-alias scrub="clear && printf '\033[3J'"
+alias cls="clear && printf '\033[3J'"
 
 alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
 
