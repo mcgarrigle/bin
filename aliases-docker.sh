@@ -21,9 +21,10 @@ function _project_name {
 }
 
 function dc {
-  project=$(_project_name)
-  echo project = \"$project\"
-  COMPOSE_PROJECT_NAME=$project docker-compose $@
+  # project=$(_project_name)
+  # echo project = \"$project\"
+  # COMPOSE_PROJECT_NAME=$project docker-compose $@
+  docker-compose $@
 }
 
 function dr {

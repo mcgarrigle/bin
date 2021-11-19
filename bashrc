@@ -43,6 +43,14 @@ function contains {
   [ -z "${2##*$1*}" ]
 }
 
+function encrypt {
+  openssl enc -e -base64 -aes-128-ctr -nopad -nosalt -k $MASTER_KEY
+}
+
+function decrypt {
+  openssl enc -d -base64 -aes-128-ctr -nopad -nosalt -k $MASTER_KEY
+}
+
 OS=$(uname -s)
 
 PLATFORM=$(echo "$OS" | awk '{print tolower($0)}')
