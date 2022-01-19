@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import sys, re
+
+block = sys.stdin.read()
+# print(block)
+
+# rec = re.split("(\s(?=\w+?=))", block)
+
+rec = re.findall('([\w\-]+=\S*)\s|$', block)
+
+for r in rec:
+    print(r)
+
+# print(rec)
