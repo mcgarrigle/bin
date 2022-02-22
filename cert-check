@@ -1,0 +1,10 @@
+#!/bin/sh
+
+SUBJECT=$1
+
+echo match modulus
+openssl x509 -noout -modulus -in /etc/pki/tls/certs/${SUBJECT}.crt | md5sum
+openssl rsa -noout -modulus -in /etc/pki/tls/private/${SUBJECT}.pem | md5sum
+echo
+openssl x509 -text -noout -in /etc/pki/tls/certs/${SUBJECT}.crt
+
