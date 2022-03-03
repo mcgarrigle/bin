@@ -43,6 +43,10 @@ function contains {
   [ -z "${2##*$1*}" ]
 }
 
+function cert-show {
+  openssl x509 -text -noout -in "$1"
+}
+
 function encrypt {
   openssl enc -e -base64 -aes-128-ctr -nopad -nosalt -k $MASTER_KEY
 }
