@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+import sys,random
+
+print(random.randint(1, int(sys.argv[1])))
