@@ -1,7 +1,30 @@
 #!/bin/bash
 
-SUBJECT="$1"
-CONFIG="/tmp/${SUBJECT}.conf"
+# usage:
+#
+# cert-make 'C=GB,L=Cardiff,CN=foo.mac.wales'
+#
+# defaults to CN=$HOSTNAME
+#
+
+if [ -z "$1" ]; then
+  DN="CN=$HOSTNAME"
+else
+  DN="$1"
+fi
+
+SUBJECT=$(echo $DN | tr ',' '\n')
+ATTRIBUTES=$(echo $DN | tr ',' ' ')
+
+for A in $ATTRIBUTES; do
+  eval "export DN_${A}"
+done
+
+CN="$DN_CN"
+
+CONFIG="/tmp/${CN}.conf"
+CERT="/tmp/${CN}.crt"
+KEY="/tmp/${CN}.pem"
 
 cat > "${CONFIG}" <<EOF
 [req]
@@ -12,24 +35,18 @@ distinguished_name = dn
 x509_extensions = v3_req
 
 [dn]
-C = UK
-ST = Wales
-L = Cardiff
-O = MAC.WALES
-CN = ${SUBJECT}
+${SUBJECT}
 
 [v3_req]
 subjectAltName = @alt_names
-basicConstraints = CA:TRUE
+basicConstraints = CA:FALSE
 
 [alt_names]
-DNS.1 = ${SUBJECT}
+DNS.1 = ${CN}
 EOF
 
-CERT="/etc/pki/tls/certs/${SUBJECT}.crt"
-KEY="/etc/pki/tls/private/${SUBJECT}.pem"
-
 openssl req -x509 \
+  -batch \
   -config "${CONFIG}" \
   -newkey rsa:4096 -nodes \
   -keyout "${KEY}" \
