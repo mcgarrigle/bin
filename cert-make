@@ -2,16 +2,23 @@
 
 # usage:
 #
-# cert-make 'C=GB,L=Cardiff,CN=foo.mac.wales'
+# cert-make <FDN> <DNS/IP SAN>*
+#
+# cert-make 'C=GB,ST=Wales,L=Cardiff,O=McGarrigle,CN=foo.mac.wales' 'DNS=www.mac.wales' 'DNS=*' 'IP=192.168.1.1' 'IP=192.168.1.2'
 #
 # defaults to CN=$HOSTNAME
 #
+
+lines() {
+  tr ' ' '\n'
+}
 
 if [ -z "$1" ]; then
   DN="CN=$HOSTNAME"
 else
   DN="$1"
 fi
+shift
 
 SUBJECT=$(echo $DN | tr ',' '\n')
 ATTRIBUTES=$(echo $DN | tr ',' ' ')
@@ -21,6 +28,9 @@ for A in $ATTRIBUTES; do
 done
 
 CN="$DN_CN"
+
+DNS=$(echo "DNS=${CN} $@" | lines | grep "DNS=" | awk -F'=' '{ print "DNS." NR "=" $2 }')
+IPS=$(echo "$@" | lines | grep "IP=" | awk -F'=' '{ print "IP." NR "=" $2 }')
 
 CONFIG="/tmp/${CN}.conf"
 CERT="/tmp/${CN}.crt"
@@ -42,20 +52,21 @@ subjectAltName = @alt_names
 basicConstraints = CA:FALSE
 
 [alt_names]
-DNS.1 = ${CN}
+${DNS}
+${IPS}
 EOF
 
 openssl req -x509 \
-  -batch \
   -config "${CONFIG}" \
-  -newkey rsa:4096 -nodes \
+  -newkey rsa:4096 \
+  -nodes \
   -keyout "${KEY}" \
   -out "${CERT}" \
   -days 3650
 
 openssl x509 -in "${CERT}" -text -noout
 
-rm -f "${CONFIG}"
+# rm -f "${CONFIG}"
 
 echo
 echo $CERT
