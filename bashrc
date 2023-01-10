@@ -44,7 +44,7 @@ function contains {
 }
 
 function cert-show {
-  openssl x509 -text -noout -in "$1"
+  openssl x509 -noout -issuer -subject -ext basicConstraints,keyUsage,extendedKeyUsage,subjectAltName -in "$1"
 }
 
 function encrypt {
