@@ -88,6 +88,15 @@ function ssh-copy-keys {
   scp -p ~/.ssh/id_rsa* $host:~/.ssh
 }
 
+function root {
+  local HOST="$1"; shift
+  if [ -z "$1" ]; then
+    ssh -t "${HOST}" sudo -i
+  else
+    ssh -T "${HOST}" sudo $@
+  fi
+}
+
 function ai {
   ssh -i ~/.ssh/personal.pem ec2-user@$1
 }
