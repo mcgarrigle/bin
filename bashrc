@@ -1,6 +1,6 @@
 
 alias ll="ls -la"
-alias vi="vim"
+alias vi="nvim"
 alias f="find . -name"
 alias cls="clear && printf '\033[3J'"
 

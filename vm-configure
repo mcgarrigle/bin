@@ -32,6 +32,13 @@ function configure_vim {
   echo -e "\nexecute pathogen#infect()" >> ~/bin/vimrc
 }
 
+function configure_neovim {
+   mkdir -p "$HOME/.local/share"
+   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar xz
+   echo 'add following to shell profile'
+   echo 'export PATH="$HOME/.local/share/nvim-linux64/bin":$PATH'
+}
+
 function configure_help {
  echo "this is help"
 }
