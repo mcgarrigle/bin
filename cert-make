@@ -33,8 +33,8 @@ DNS=$(echo "DNS=${CN} $@" | lines | grep "DNS=" | awk -F'=' '{ print "DNS." NR "
 IPS=$(echo "$@" | lines | grep "IP=" | awk -F'=' '{ print "IP." NR "=" $2 }')
 
 CONFIG="/tmp/${CN}.conf"
-CERT="/tmp/${CN}.crt"
-KEY="/tmp/${CN}.pem"
+CERT="${CN}.crt"
+KEY="${CN}.pem"
 
 cat > "${CONFIG}" <<EOF
 [req]
