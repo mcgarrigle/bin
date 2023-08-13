@@ -12,8 +12,8 @@ function configure_local {
 
 function configure_shell {
   echo -e '\n. $HOME/bin/bashrc\n' >> ~/.bashrc
-  ln -s bin/vimrc     .vimrc
-  ln -s bin/tmux.conf .tmux.conf
+  ln -sf bin/vimrc     .vimrc
+  ln -sf bin/tmux.conf .tmux.conf
 }
 
 function configure_docker {
