@@ -1,4 +1,7 @@
 #!/bin/sh
 
-docker node ls -q | xargs docker node inspect -f '{{ .Description.Hostname }}: {{ range $k, $v := .Spec.Labels }}{{ $k }}={{ $v }} {{end}}'
-
+if [ "$1" == "-j" ]; then
+  docker node ls -q | xargs docker node inspect | jq '.[] | { "node": .Description.Hostname, "labels" : .Spec.Labels }' | jq -s
+else
+  docker node ls -q | xargs docker node inspect -f '{{ .Description.Hostname }}: {{ range $k, $v := .Spec.Labels }}{{ $k }}={{ $v }} {{end}}'
+fi
