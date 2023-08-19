@@ -1,7 +1,28 @@
 #!/bin/sh
 
-if [ "$1" == "-j" ]; then
+function command_json {
   docker node ls -q | xargs docker node inspect | jq '.[] | { "node": .Description.Hostname, "labels" : .Spec.Labels }' | jq -s
-else
+}
+
+function command_list {
   docker node ls -q | xargs docker node inspect -f '{{ .Description.Hostname }}: {{ range $k, $v := .Spec.Labels }}{{ $k }}={{ $v }} {{end}}'
+}
+
+function command_select {
+  command_json | jq -r ".[] | select(.labels.$1) | .node"
+}
+
+function command_help {
+  echo "docker-labels"
+  echo "  --list"
+  echo "  --json"
+  echo "  --select <label>"
+}
+
+if [ -z "$1" ]; then
+  command_list
+else
+  FN="${1/--/command_}"
+  shift 
+  ${FN} $@
 fi
