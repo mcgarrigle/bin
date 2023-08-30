@@ -1,15 +1,23 @@
 #!/bin/sh
 
+function nodes {
+  docker node ls -q | xargs docker node inspect 
+}
+
+function json {
+  nodes | jq 'map({"node":.Description.Hostname, "labels" : .Spec.Labels})'
+}
+
 function command_json {
-  docker node ls -q | xargs docker node inspect | jq '.[] | { "node": .Description.Hostname, "labels" : .Spec.Labels }' | jq -s
+  json
 }
 
 function command_list {
-  docker node ls -q | xargs docker node inspect -f '{{ .Description.Hostname }}: {{ range $k, $v := .Spec.Labels }}{{ $k }}={{ $v }} {{end}}'
+  json | jq -r 'map("\(.node): " + (.labels | to_entries | map("\(.key)=\(.value)") | join(" "))) | .[]'
 }
 
 function command_select {
-  command_json | jq -r ".[] | select(.labels.$1) | .node"
+  json | jq "map(select(.labels.$1))"
 }
 
 function command_help {
@@ -20,7 +28,11 @@ function command_help {
 }
 
 if [ -z "$1" ]; then
-  command_list
+  if [ -t 1 ]; then
+    command_list
+  else
+    command_json
+  fi
 else
   FN="${1/--/command_}"
   shift 
