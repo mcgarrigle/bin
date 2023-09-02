@@ -1,5 +1,9 @@
 #!/bin/bash
 
+function path {
+   echo "export PATH=$1:\$PATH" >> "$HOME/.bash_profile"
+}
+
 function configure_local {
   hostnamectl set-hostname "$1.local"
   yum install -y epel-release
@@ -11,9 +15,9 @@ function configure_local {
 }
 
 function configure_shell {
-  echo -e '\n. $HOME/bin/bashrc\n' >> ~/.bashrc
-  ln -sf bin/vimrc     .vimrc
-  ln -sf bin/tmux.conf .tmux.conf
+  echo '. ${HOME}/bin/bashrc' >> "${HOME}/.bash_profile"
+  ln -sf "${HOME}/bin/tmux.conf" .tmux.conf
+  # ln -sf bin/vimrc .vimrc
 }
 
 function configure_docker {
@@ -34,16 +38,21 @@ function configure_vim {
 
 function configure_neovim {
    mkdir -p "$HOME/.local/share"
-   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar xz
-   echo 'add following to shell profile'
-   echo 'export PATH="$HOME/.local/share/nvim-linux64/bin":$PATH'
+   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar -C "$HOME/.local/share" -xz
+   path "$HOME/.local/share/nvim-linux64/bin"
+}
+
+function configure_python {
+   mkdir -p "$HOME/.local/share"
+   python3 -m venv "$HOME/.local/share/venv/bin"
+   path "$HOME/.local/share/venv/bin"
 }
 
 function configure_help {
  echo "this is help"
 }
 
-cmd="configure_$1"
-shift
-
-$cmd $@
+for WORD in $@; do
+  CMD="configure_${WORD}"
+  $CMD 
+done
