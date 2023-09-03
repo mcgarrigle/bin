@@ -37,9 +37,10 @@ function configure_vim {
 }
 
 function configure_neovim {
-   mkdir -p "$HOME/.local/share"
-   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar -C "$HOME/.local/share" -xz
-   path "$HOME/.local/share/nvim-linux64/bin"
+   mkdir -p "${HOME}/.local/share" "${HOME}/.config"
+   curl -L https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz | tar -C "${HOME}/.local/share" -xz
+   path "${HOME}/.local/share/nvim-linux64/bin"
+   git clone 'https://github.com/mcgarrigle/nvim.git' "${HOME}/.config/nvim"
 }
 
 function configure_python {
