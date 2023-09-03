@@ -45,7 +45,7 @@ function configure_neovim {
 
 function configure_python {
    mkdir -p "$HOME/.local/share"
-   python3 -m venv "$HOME/.local/share/venv/bin"
+   python3 -m venv "$HOME/.local/share/venv"
    path "$HOME/.local/share/venv/bin"
 }
 
