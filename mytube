@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+
+# mytube 'http://youtube.com/watch?v=9bZkp7q19f0'
+
+import sys
+from pytube import YouTube
+
+url = sys.argv[1]
+yt = YouTube(url)
+yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()
