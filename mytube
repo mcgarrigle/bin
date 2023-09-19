@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 
 # mytube 'http://youtube.com/watch?v=9bZkp7q19f0'
+# mytube --audio 'http://youtube.com/watch?v=9bZkp7q19f0'
 
 import sys
+import argparse
 from pytube import YouTube
 
-url = sys.argv[1]
-yt = YouTube(url)
-yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()
+parser = argparse.ArgumentParser()
+parser.add_argument("-a", "--audio", help="download audio", action="store_true")
+parser.add_argument("url", nargs="?", default="")
+args = parser.parse_args()
+
+yt = YouTube(args.url)
+if args.audio:
+    print('download audio')
+    yt.streams.filter(only_audio=True).first().download()
+else:
+    print('download video')
+    yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()

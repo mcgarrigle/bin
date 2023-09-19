@@ -1,10 +1,9 @@
-
 export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 export CLICOLOR=1
 
 alias ll="ls -la"
-alias vi="vim"
+alias vi="nvim"
 alias f="find . -name"
 alias cls="clear && printf '\033[3J'"
 
@@ -59,6 +58,16 @@ function p0 {
 function p1 {
   export http_proxy=$proxy
   export https_proxy=$proxy
+}
+
+
+function root {
+  local HOST="$1"; shift
+  if [ -z "$1" ]; then
+    ssh -t "${HOST}" sudo -i
+  else
+    ssh -T "${HOST}" sudo $@
+  fi
 }
 
 function contains {
