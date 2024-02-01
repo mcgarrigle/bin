@@ -10,7 +10,7 @@ export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 export PS1='[\u@\h \W]\$ '
 
-for app in git ruby vbx puppet docker terraform libvirt; do
+for app in git docker terraform libvirt; do
   source "aliases-${app}.sh"
 done
 
