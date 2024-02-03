@@ -1,3 +1,8 @@
+THIS=$(realpath "$BASH_SOURCE")
+HERE=$(dirname "${THIS}")
+
+. ${HERE}/contexts
+
 alias di='docker images'
 alias dp='docker ps --format "{{.ID}}:\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
