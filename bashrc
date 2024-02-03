@@ -1,3 +1,5 @@
+THIS=$(realpath "$BASH_SOURCE")
+HERE=$(dirname "${THIS}")
 
 alias ll="ls -la"
 alias vi="nvim"
@@ -10,8 +12,8 @@ export PATH="$HOME/bin:$PATH"
 export EDITOR=vim
 export PS1='[\u@\h \W]\$ '
 
-for app in git docker terraform libvirt; do
-  source "aliases-${app}.sh"
+for APP in git docker terraform libvirt; do
+  source "${HERE}/plugins/${APP}.sh"
 done
 
 if [ -z "${proxy}" ]; then

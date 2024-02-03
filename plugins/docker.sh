@@ -1,11 +1,44 @@
-THIS=$(realpath "$BASH_SOURCE")
-HERE=$(dirname "${THIS}")
-
-. ${HERE}/contexts
-
 alias di='docker images'
 alias dp='docker ps --format "{{.ID}}:\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+
+# -------------------------------------
+# context management
+
+declare -A CONTEXTS
+
+CONTEXTS[default]=unix:///var/run/docker.sock
+
+function _list_contexts {
+  local LIST=$(echo ${!CONTEXTS[@]} | tr ' ' '\n' | sort)
+  echo "current: $CURRENT_CONTEXT $DOCKER_HOST"
+  echo
+  for KEY in ${LIST}; do
+    echo "${KEY} => ${CONTEXTS[$KEY]}"
+  done
+}
+
+function _set_context {
+  if [ -z ${CONTEXTS[$1]} ]; then
+    echo "$1 not known"
+  else
+    export CURRENT_CONTEXT="$1"
+    export DOCKER_HOST=${CONTEXTS[$CURRENT_CONTEXT]}
+  fi
+}
+
+function context {
+  if [ -z "$1" ]; then
+    _list_contexts
+  else
+    _set_context "$1"
+    echo $CURRENT_CONTEXT $DOCKER_HOST
+  fi
+}
+
+_set_context "default"
+
+# -------------------------------------
 
 function _branch {
   if [ -d .git ]; then

@@ -1,15 +1,12 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env python3
 
-require 'inifile'
-require 'pp'
+import os
+import configparser
 
-home = ENV['HOME']
+home = os.environ["HOME"]
+config = configparser.ConfigParser()
+config.read(f"{home}/.gitconfig")
 
-ini = IniFile.load("#{home}/.gitconfig")
-
-user = ini['user']
-
-puts "git config --global user.name '#{user['name']}'"
-puts "git config --global user.email '#{user['email']}'"
-puts "git config --global push.default current"
-
+print(f"git config --global user.name '{config.get('user', 'name')}'")
+print(f"git config --global user.email '{config.get('user', 'email')}'")
+print(f"git config --global push.default current")
