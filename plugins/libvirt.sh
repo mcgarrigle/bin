@@ -2,6 +2,8 @@
 # allow console to complete lists of running domains
 #
 
+export LIBVIRT_DEFAULT_URI='qemu:///system'
+
 console()
 {
   virsh console --domain "$1"
