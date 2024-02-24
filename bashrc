@@ -1,10 +1,16 @@
 THIS=$(realpath "$BASH_SOURCE")
 HERE=$(dirname "${THIS}")
 
+export BASHENV="${HOME}/.bashenv"
+if [ -f "${BASHENV}" ]; then
+  source "${BASHENV}"
+fi
+
 alias ll="ls -la"
 alias vi="nvim"
 alias f="find . -name"
 alias cls="clear && printf '\033[3J'"
+alias py="python3"
 
 alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
 
