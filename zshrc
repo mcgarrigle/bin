@@ -25,6 +25,9 @@ alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset
 
 eval $(/opt/homebrew/bin/brew shellenv)
 
+# echo
+# neofetch
+
 function fix {
   git add $1
   git commit -m "updated $1"
