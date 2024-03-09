@@ -4,6 +4,7 @@ export CLICOLOR=1
 
 alias ll="ls -la"
 alias vi="nvim"
+alias vim="nvim"
 alias f="find . -name"
 alias cls="clear && printf '\033[3J'"
 
