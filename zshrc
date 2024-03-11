@@ -24,7 +24,8 @@ alias gll="git --no-pager log --pretty=format:'%C(bold)%h %ci %C(magenta)%ae %C(
 alias glt='git --no-pager log --pretty=oneline --abbrev-commit --max-count=20'
 alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
 
-eval $(/opt/homebrew/bin/brew shellenv)
+# eval $(/opt/homebrew/bin/brew shellenv)
+eval $(brew shellenv)
 
 # echo
 # neofetch
