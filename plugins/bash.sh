@@ -4,7 +4,10 @@ alias v=vim
 alias f="find . -name"
 alias cls="clear && printf '\033[3J'"
 alias py="python3"
-alias tm='tmux new-session \; split-window -h \; split-window -v \; attach'
+
+alias tm2='tmux new-session \; split-window -h -p 33 \; attach'
+alias tm3='tmux new-session \; split-window -h -p 33 \; split-window -v \; attach'
+alias tm='tm2'
 
 export EDITOR=vim
 export PS1='[\u@\h \W]\$ '
