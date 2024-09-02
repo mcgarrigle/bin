@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+# dependencies: docker paramiko
+
+import collections
+import json
+import docker
+import click
+
+def read_nodes():
+    nodes = [ node.attrs for node in client.nodes.list() ]
+    labels = { node["Description"]["Hostname"]: node["Spec"]["Labels"] for node in nodes }
+    return labels
+
+def find_roles(nodes):
+    roles = collections.defaultdict(list)
+    for node, labels in nodes.items():
+        for role in labels.keys():
+            roles[role].append(node)
+    return roles
+
+# ------------------------------------------------------------------
+
+@click.group()
+def cli():
+    pass
+
+@cli.command()
+def labels():
+    print(json.dumps(nodes, indent=2))
+
+@cli.command()
+@click.argument('stack_name')
+def roles(stack_name):
+    length = len(stack_name) + 1
+    roles = find_roles(nodes)
+    for role, role_nodes in roles.items():
+        if role.startswith(stack_name):
+            role = role[length:]
+            print(f"export {role.upper()}_NODES='{' '.join(role_nodes)}'")
+
+if __name__ == '__main__':
+    client = docker.from_env()
+    nodes = read_nodes()
+    cli()

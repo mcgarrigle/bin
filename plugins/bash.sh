@@ -12,6 +12,10 @@ alias tm='tm2'
 export EDITOR=vim
 export PS1='[\u@\h \W]\$ '
 
+function path {
+  echo $PATH | tr ':' '\n'
+}
+
 # change to directory that exists somewhere rooted
 # at $HOME
 
