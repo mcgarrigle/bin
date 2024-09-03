@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+#
 # dependencies: docker paramiko
 
 import collections
@@ -7,10 +7,12 @@ import json
 import docker
 import click
 
+def unpack_attributes(attrs):
+    return (attrs["Description"]["Hostname"], attrs["Spec"]["Labels"])
+
 def read_nodes():
-    nodes = [ node.attrs for node in client.nodes.list() ]
-    labels = { node["Description"]["Hostname"]: node["Spec"]["Labels"] for node in nodes }
-    return labels
+    nodes = [ unpack_attributes(node.attrs) for node in client.nodes.list() ]
+    return dict(nodes)
 
 def find_roles(nodes):
     roles = collections.defaultdict(list)
