@@ -30,11 +30,15 @@ function c {
 function p0 {
   unset http_proxy
   unset https_proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
 }
 
 function p1 {
   export http_proxy=$proxy
   export https_proxy=$proxy
+  export HTTP_PROXY=$proxy
+  export HTTPS_PROXY=$proxy
 }
 
 function contains {
@@ -43,6 +47,10 @@ function contains {
 
 function cert-show {
   openssl x509 -noout -issuer -subject -ext basicConstraints,keyUsage,extendedKeyUsage,subjectAltName -in "$1"
+}
+
+function cert-dump {
+  openssl x509 -noout -text -in "$1"
 }
 
 function encrypt {
