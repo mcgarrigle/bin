@@ -58,12 +58,7 @@ function _project_name {
   _branch
 }
 
-function dc {
-  # project=$(_project_name)
-  # echo project = \"$project\"
-  # COMPOSE_PROJECT_NAME=$project docker-compose $@
-  docker-compose $@
-}
+alias dc=context
 
 function dr {
   image=$1; shift
