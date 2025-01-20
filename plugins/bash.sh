@@ -13,7 +13,11 @@ export EDITOR=vim
 export PS1='[\u@\h \W]\$ '
 
 function path {
-  echo $PATH | tr ':' '\n'
+  if [ "$1" == "add" ]; then
+    export PATH=$2:$PATH
+  else
+    echo $PATH | tr ':' '\n'
+  fi
 }
 
 # change to directory that exists somewhere rooted
@@ -61,6 +65,11 @@ function decrypt {
   openssl enc -d -base64 -aes-128-ctr -nopad -nosalt -k $MASTER_KEY
 }
 
+function github-ssh-keys {
+  mkdir --mode 0755 "${HOME}/.ssh"
+  touch "${HOME}/.ssh/authorized_keys"
+  curl https://github.com/$1.keys >> "${HOME}/.ssh/authorized_keys"
+}
 
 # ---------------------------------
 # s - ssh matching name in 
