@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get the current commit hash
+commit_hash=$(git rev-parse --short HEAD)
+
+# Check if the current commit has a tag
+tag_name=$(git describe --exact-match --tags $commit_hash 2>/dev/null)
+
+# If tag_name is empty, return the commit hash; otherwise, return the tag name
+if [ -z "$tag_name" ]; then
+  echo $commit_hash
+else
+  echo $tag_name
+fi
+
