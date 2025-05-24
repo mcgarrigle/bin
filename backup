@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rsync -avc \
+  --exclude .Trash \
+  --exclude Library \
+  --exclude Desktop \
+  $HOME $BACKUP_DESTINATION
