@@ -35,6 +35,10 @@ BOX_LEFT_TEE="$(utf8 251C)"
 function _distro_icon {
   case "${ID}" in
 
+    "alpine")
+      echo -n ${CYAN}$(utf8 f300)
+      ;;
+
     "raspbian")
       echo -n ${RED}$(utf8 f315)
       ;;
