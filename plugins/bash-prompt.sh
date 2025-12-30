@@ -59,10 +59,17 @@ function _prompt_string_3 {
   echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
 }
 
-function _prompt_string {
+function _prompt_string_2 {
   echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} [${DISTRO_ICON} \\h] \\T ${GREEN}${USER} ${YELLOW}\\\w${CYAN}$(__git_ps1 " (%s)")${RESET}
   echo ${BOX_VERTICAL}
   echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
 }
 
+function _prompt_string {
+  BRANCH=$(__git_ps1 " (%s)")
+  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} ${GREEN}\\u${RESET} [${DISTRO_ICON} \\h] \\T ${YELLOW}\\\w${CYAN}${BRANCH}${RESET}
+  echo ${BOX_VERTICAL}
+  echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
+}
+        
 PROMPT_COMMAND='PS1=$(_prompt_string)'
