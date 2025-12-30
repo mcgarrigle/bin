@@ -60,7 +60,7 @@ function _prompt_string_3 {
 }
 
 function _prompt_string {
-  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} [${DISTRO_ICON}] \\T ${GREEN}${USER}@$(hostname) ${YELLOW}\\\w${CYAN}$(__git_ps1 " (%s)")${RESET}
+  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} [${DISTRO_ICON} \\h] \\T ${GREEN}${USER} ${YELLOW}\\\w${CYAN}$(__git_ps1 " (%s)")${RESET}
   echo ${BOX_VERTICAL}
   echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
 }
