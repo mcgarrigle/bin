@@ -65,4 +65,4 @@ function _prompt_string {
   echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
 }
 
-PROMPT_COMMAND="PS1=\"$(_prompt_string)\""
+PROMPT_COMMAND='PS1=$(_prompt_string)'
