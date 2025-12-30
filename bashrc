@@ -1,7 +1,7 @@
 THIS=$(realpath "$BASH_SOURCE")
 HERE=$(dirname "${THIS}")
 
-for APP in bash git docker terraform libvirt; do
+for APP in bash git git-prompt bash-prompt docker terraform libvirt; do
   source "${HERE}/plugins/${APP}.sh"
 done
 
