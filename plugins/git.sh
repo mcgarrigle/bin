@@ -33,3 +33,12 @@ function fixup {
   git commit --amend -C HEAD
 }
 
+function __git_branch {
+  local BRANCH
+  BRANCH=$(git describe --contains --all HEAD 2> /dev/null)
+  if [ "$?" = "0" ]; then
+    echo "(${BRANCH})"
+  else
+    echo ""
+  fi
+}

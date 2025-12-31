@@ -1,5 +1,8 @@
+SOH="\001"
+STX="\002"
+
 function colour {
-  echo -e "\e[$1m"
+  echo -e "${SOH}\e[$1m${STX}"
 }
 
 RESET="$(colour 39)"
@@ -55,25 +58,21 @@ function _distro_icon {
   echo ${RESET}
 }
 
-export DISTRO_ICON=$(_distro_icon)
-
-function _prompt_string_3 {
-  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} ${GREEN}${USER}@$(hostname)${RESET}
-  echo ${BOX_LEFT_TEE}${BOX_HORIZONTAL} ${YELLOW}\\\w${CYAN}$(__git_ps1 " (%s)")${RESET}
-  echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
-}
-
-function _prompt_string_2 {
-  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} [${DISTRO_ICON} \\h] \\T ${GREEN}${USER} ${YELLOW}\\\w${CYAN}$(__git_ps1 " (%s)")${RESET}
-  echo ${BOX_VERTICAL}
-  echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
-}
+DISTRO_ICON=$(_distro_icon)
 
 function _prompt_string {
-  BRANCH=$(__git_ps1 " (%s)")
-  echo ${BOX_DOWN_LEFT}${BOX_HORIZONTAL} ${GREEN}\\u${RESET} [${DISTRO_ICON} \\h] \\T ${YELLOW}\\\w${CYAN}${BRANCH}${RESET}
-  echo ${BOX_VERTICAL}
-  echo ${BOX_UP_RIGHT}${BOX_HORIZONTAL} \$" "  
+  BRANCH="$(__git_branch)"
+  echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
+  echo -n "${GREEN}\\u${RESET} "
+  echo -n "[${DISTRO_ICON} \\h] "
+  echo -n "\\T "
+  echo -n "${YELLOW}\\w "
+  echo -n "${CYAN}${BRANCH}${RESET}"
+  echo
+  echo -n "${BOX_VERTICAL}"
+  echo
+  echo -n "${BOX_UP_RIGHT}${BOX_HORIZONTAL} "
+  echo -n "\\$ "  
 }
         
 PROMPT_COMMAND='PS1=$(_prompt_string)'
