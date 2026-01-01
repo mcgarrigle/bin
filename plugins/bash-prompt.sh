@@ -38,21 +38,13 @@ BOX_LEFT_TEE="$(utf8 251C)"
 function _distro_icon {
   case "${ID}" in
 
-    "alpine")
-      echo -n ${CYAN}$(utf8 f300)
-      ;;
+    alpine)   echo -n ${CYAN}$(utf8 f300) ;;
 
-    "raspbian")
-      echo -n ${RED}$(utf8 f315)
-      ;;
+    raspbian) echo -n ${RED}$(utf8 f315) ;;
 
-    "rocky")
-      echo -n ${GREEN}$(utf8 f32b)
-      ;;
+    rocky)    echo -n ${GREEN}$(utf8 f32b) ;;
 
-    *)
-      echo -n ${YELLOW}$(utf8 f31a)
-      ;;
+    *)        echo -n ${YELLOW}$(utf8 f31a) ;;
 
   esac
   echo ${RESET}
@@ -68,9 +60,9 @@ function _prompt_string {
   echo -n "\\T "
   echo -n "${YELLOW}\\w "
   echo -n "${CYAN}${BRANCH}${RESET}"
-  echo
+  echo -n "\\r\\n"
   echo -n "${BOX_VERTICAL}"
-  echo
+  echo -n "\\r\\n"
   echo -n "${BOX_UP_RIGHT}${BOX_HORIZONTAL} "
   echo -n "\\$ "  
 }
