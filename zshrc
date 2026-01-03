@@ -27,9 +27,6 @@ alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset
 # eval $(/opt/homebrew/bin/brew shellenv)
 eval $(brew shellenv)
 
-# echo
-# neofetch
-
 function fix {
   git add $1
   git commit -m "updated $1"
@@ -65,7 +62,6 @@ function p1 {
   export https_proxy=$proxy
 }
 
-
 function root {
   local HOST="$1"; shift
   if [ -z "$1" ]; then
@@ -78,3 +74,7 @@ function root {
 function contains {
   [ -z "${2##*$1*}" ]
 }
+
+for APP in git prompt; do
+  source "${HOME}/bin/plugins/${APP}.sh"
+done
