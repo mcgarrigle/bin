@@ -1,5 +1,6 @@
-SOH="\001"
-STX="\002"
+function include {
+  test -f "$1" && source "$1"
+}
 
 function colour {
   if [ "${_SHELL}" = "zsh" ]; then
@@ -25,20 +26,14 @@ function utf8 {
   printf "%b" "\u$1"
 }
 
-BOX_DOWN_LEFT="$(utf8 250C)"
-BOX_UP_RIGHT="$(utf8 2514)"
-BOX_HORIZONTAL="$(utf8 2500)"
-BOX_VERTICAL="$(utf8 2502)"
-BOX_LEFT_TEE="$(utf8 251C)"
-
 function _os_name {
-  local KERNEL=$(uname)
+  local KERNEL="$(uname)"
 
   if [ "${KERNEL}" = "Linux" ]; then
-    . /etc/os-release
-    echo "${ID}"
+    include /etc/os-release
+    echo "${ID:-Linux}"
   else
-    echo ${KERNEL}
+    echo "${KERNEL}"
   fi
 }
 
@@ -52,20 +47,15 @@ function _shell_name {
 
 function _distro_icon {
   case "$1" in
-    alpine)   echo -n ${CYAN}$(utf8 f300) ;;
-    raspbian) echo -n ${RED}$(utf8 f315) ;;
-    rocky)    echo -n ${GREEN}$(utf8 f32b) ;;
-    Darwin)   echo -n ${WHITE}$(utf8 f302) ;;
-    *)        echo -n ${YELLOW}$(utf8 f31a) ;;
+    alpine)   echo -n "${CYAN}$(utf8 f300)" ;;
+    raspbian) echo -n "${RED}$(utf8 f315)" ;;
+    rocky)    echo -n "${GREEN}$(utf8 f32b)" ;;
+    Linux)    echo -n "${YELLOW}$(utf8 f31a)" ;;
+    Darwin)   echo -n "${WHITE}$(utf8 f302)" ;;
+    *)        echo -n "${RED}?" ;;
   esac
   echo -n ${RESET}
 }
-
-_SHELL=$(_shell_name)
-_define_colours
-
-OS=$(_os_name)
-DISTRO_ICON=$(_distro_icon "${OS}")
 
 function _bash_prompt_string {
   BRANCH="$(__git_branch)"
@@ -97,6 +87,21 @@ function _zsh_prompt_string {
   echo -n "%# "  
 }
         
+SOH="\001"
+STX="\002"
+
+BOX_DOWN_LEFT="$(utf8 250C)"
+BOX_UP_RIGHT="$(utf8 2514)"
+BOX_HORIZONTAL="$(utf8 2500)"
+BOX_VERTICAL="$(utf8 2502)"
+BOX_LEFT_TEE="$(utf8 251C)"
+
+_SHELL="$(_shell_name)"
+_define_colours
+
+OS="$(_os_name)"
+DISTRO_ICON=$(_distro_icon "${OS}")
+
 PROMPT_COMMAND='PS1=$(_bash_prompt_string)'
 
 function precmd {
