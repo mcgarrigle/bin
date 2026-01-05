@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ "$(uname)" = "Darwin" ]; then
+  PING="ping6"
+else
+  PING="ping"
+fi
+
+function check_ipv6 {
+  IP=$(curl -s v6.ident.me)
+  echo "address: ${IP}"
+  echo
+  ${PING} -c 5 v6.ident.me
+}
+
+check_$1
