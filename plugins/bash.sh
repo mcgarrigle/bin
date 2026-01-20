@@ -71,6 +71,22 @@ function github-ssh-keys {
   curl https://github.com/$1.keys >> "${HOME}/.ssh/authorized_keys"
 }
 
+function _bash_set_key {
+  echo "$1" | jq -c ".$2 = \"$3\""
+}
+
+function _bash_get_key {
+  echo "$1" | jq -r ".$2"
+}
+
+function _bash_get_keys {
+  echo "$1" | jq -r 'keys[]'
+}
+
+function _bash_get_pairs {
+  echo "$1" | jq -r 'to_entries[] | [.key, .value] | @tsv'
+}
+
 # ---------------------------------
 # s - ssh matching name in 
 #     inventory
