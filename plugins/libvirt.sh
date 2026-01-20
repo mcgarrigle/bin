@@ -5,33 +5,9 @@
 
 # https://docs.virtuozzo.com/libvirt-docs-5.6.0/html/uri.html
 
-declare -A HYPERVISORS
-
-export HYPERVISOR_default="qemu:///system"
-HYPERVISORS='{}'
-
-# HYPERVISORS[smol]="qemu+ssh://${USER}@smol.mac.wales/system?keyfile=${HOME}/.ssh/id_rsa&sshauth=privkey&no_verify=1"
-# HYPERVISORS[wee]="qemu+ssh://${USER}@wee.mac.wales/system?keyfile=${HOME}/.ssh/id_rsa&sshauth=privkey&no_verify=1"
-
-function x_list_hypervisors {
-  local LIST=$(echo ${!HYPERVISORS[@]} | tr ' ' '\n' | sort)
-  echo "current: $HYPERVISOR => $LIBVIRT_DEFAULT_URI"
-  echo
-  for KEY in ${LIST}; do
-    echo "${KEY} => ${HYPERVISORS[$KEY]}"
-  done
-}
-
-function x2_list_hypervisors {
-  echo "current: $HYPERVISOR => $LIBVIRT_DEFAULT_URI"
-  echo
-  VARS=$(compgen -v -X '!HYPERVISOR_*')
-  for VAR in $VARS; do
-    NAME=$(echo ${VAR/HYPERVISOR_/})
-    VAL=$(eval "echo \$"$VAR)
-    echo "${NAME} => ${VAL}"
-  done
-}
+export HYPERVISORS='{}'
+export HYPERVISOR
+export LIBVIRT_DEFAULT_URI
 
 function _list_hypervisors {
   echo "current: $HYPERVISOR => $LIBVIRT_DEFAULT_URI"
@@ -48,8 +24,8 @@ function _default_hypervisor {
   if [ "${VAL}" = "null" ]; then
     echo "$1 not known"
   else
-    export HYPERVISOR="$1"
-    export LIBVIRT_DEFAULT_URI=${VAL}
+    HYPERVISOR="$1"
+    LIBVIRT_DEFAULT_URI=${VAL}
   fi
 }
 

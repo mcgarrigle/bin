@@ -3,40 +3,50 @@ alias dp='docker ps --format "{{.ID}}:\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dn="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 # -------------------------------------
-# context management
+# docker context management
+#
+# bugs around local context causing loops
+# forces use of DOCKER_HOST instead as it
+# is safe in all circumstances
 
-declare -A CONTEXTS
-
-CONTEXTS[default]=unix:///var/run/docker.sock
+export CONTEXTS="{}"
+export CONTEXT
+export DOCKER_HOST
 
 function _list_contexts {
-  local LIST=$(echo ${!CONTEXTS[@]} | tr ' ' '\n' | sort)
-  echo "current: $CURRENT_CONTEXT $DOCKER_HOST"
+  echo "current: $CONTEXT $DOCKER_HOST"
   echo
-  for KEY in ${LIST}; do
-    echo "${KEY} => ${CONTEXTS[$KEY]}"
-  done
+  local LIST=$(_bash_get_pairs "${CONTEXTS}")
+  echo "${LIST}"
+}
+
+function _default_context {
+  local VAL=$(_bash_get_key "${CONTEXTS}" "$1")
+  if [ "${VAL}" = "null" ]; then
+    echo "$1 not known"
+  else
+    CONTEXT="$1"
+    DOCKER_HOST="${VAL}"
+  fi
 }
 
 function _set_context {
-  if [ -z ${CONTEXTS[$1]} ]; then
-    echo "$1 not known"
-  else
-    export CURRENT_CONTEXT="$1"
-    export DOCKER_HOST=${CONTEXTS[$CURRENT_CONTEXT]}
-  fi
+  CONTEXTS=$(_bash_set_key "${CONTEXTS}" "$1" "$2")
 }
 
 function context {
-  if [ -z "$1" ]; then
+  if [[ $# == 0 ]]; then
     _list_contexts
+  elif [[ $# == 1 ]]; then
+    _default_context "$1"
+    echo $CONTEXT $DOCKER_HOST
   else
-    _set_context "$1"
-    echo $CURRENT_CONTEXT $DOCKER_HOST
+    _set_context "$1" "$2"
   fi
 }
 
-_set_context "default"
+context local unix:///var/run/docker.sock  
+_default_context "local"
 
 # -------------------------------------
 
