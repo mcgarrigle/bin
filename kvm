@@ -10,12 +10,26 @@ function command_vols {
   virsh vol-list --pool "${POOL}"
 }
 
+function command_info {
+  virsh dominfo --domain "$1"
+  virsh domblklist --domain "$1"
+}
+
 function command_rm {
-  virsh destroy $1
-  virsh undefine $1
+  virsh destroy "$1"
+  virsh undefine "$1"
   virsh vol-delete --pool "${POOL}" --vol "$1.qcow2"
 }
 
-COMMAND="$1"
+function command_help {
+  echo "kvm - manage kvm VMs"
+  echo
+  echo "kvm ls            - list domains"
+  echo "kvm info <name>   - get domain info"
+  echo "kvm vols          - list volumes in pool POOL"
+  echo "kvm rm <name>     - delete domain and volume"
+}
+
+COMMAND="${1:-help}"
 shift
 command_${COMMAND} $@
