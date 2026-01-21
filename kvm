@@ -1,0 +1,21 @@
+#!/bin/bash
+
+POOL="${POOL:-filesystems}"
+
+function command_ls {
+  virsh list --all
+}
+
+function command_vols {
+  virsh vol-list --pool "${POOL}"
+}
+
+function command_rm {
+  virsh destroy $1
+  virsh undefine $1
+  virsh vol-delete --pool "${POOL}" --vol "$1.qcow2"
+}
+
+COMMAND="$1"
+shift
+command_${COMMAND} $@
