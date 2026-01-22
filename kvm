@@ -17,8 +17,8 @@ function command_info {
 
 function command_rm {
   virsh destroy "$1"
-  virsh undefine "$1"
-  virsh vol-delete --pool "${POOL}" --vol "$1.qcow2"
+  virsh undefine --nvram --remove-all-storage "$1"
+  # virsh vol-delete --pool "${POOL}" --vol "$1.qcow2"
 }
 
 function command_help {
