@@ -71,6 +71,10 @@ function github-ssh-keys {
   curl https://github.com/$1.keys >> "${HOME}/.ssh/authorized_keys"
 }
 
+function ssh-copy-keys {
+  scp -p ~/.ssh/id_* $1:~/.ssh
+}
+
 function _bash_set_key {
   echo "$1" | jq -c ".$2 = \"$3\""
 }
