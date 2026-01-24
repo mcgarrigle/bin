@@ -1,7 +1,3 @@
-function include {
-  test -f "$1" && source "$1"
-}
-
 function colour {
   if [ "${_SHELL}" = "zsh" ]; then
     echo -e "%F{$1}"

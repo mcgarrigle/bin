@@ -1,0 +1,30 @@
+# --------------------------------------
+# Example .bashenv file
+#
+
+export BACKUP_DESTINATION="s2:backup/${HOSTNAME}"
+
+path add ${HOME}/.local/share/venv/bin
+path add ${HOME}/.local/share/nvim-linux64/bin
+path add ${HOME}/.local/share/go/bin
+path add ${HOME}/projects/pyki
+path add ${HOME}/projects/fog
+path add /usr/libexec
+
+context smol  ssh://node21.mac.wales
+context wee   ssh://node1.mac.wales
+context node1 ssh://node1.mac.wales
+context node2 ssh://node2.mac.wales
+context node3 ssh://node3.mac.wales
+
+function libvirt_uri {
+  echo "qemu+ssh://${USER}@$1/system?keyfile=${HOME}/.ssh/id_rsa&sshauth=privkey&no_verify=1"
+}
+
+hypervisor dwt  "$(libvirt_uri dwt.mac.wales)"
+hypervisor smol "$(libvirt_uri smol.mac.wales)"
+hypervisor wee  "$(libvirt_uri wee.mac.wales)"
+
+hypervisor dwt > /dev/null
+
+export CDPATH=~/projects/
