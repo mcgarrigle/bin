@@ -42,3 +42,7 @@ function __git_branch {
     echo ""
   fi
 }
+
+function __git_changes {
+  git status --porcelain=1 2> /dev/null | wc -l
+}

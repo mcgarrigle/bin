@@ -53,14 +53,25 @@ function _distro_icon {
   echo -n ${RESET}
 }
 
+function _shell_git_changes {
+  CHANGES="$(__git_changes)"
+  if [[ $CHANGES == 0 ]]; then
+    echo
+  else
+    echo "[${CHANGES}]"
+  fi
+}
+
 function _bash_prompt_string {
   BRANCH="$(__git_branch)"
+  CHANGES="$(_shell_git_changes)"
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "${GREEN}\\u${RESET} "
   echo -n "[${DISTRO_ICON} \\h] "
   echo -n "\\t "
   echo -n "${YELLOW}\\w "
-  echo -n "${CYAN}${BRANCH}${RESET}"
+  echo -n "${CYAN}${BRANCH}${RESET} "
+  echo -n "${BLUE}${CHANGES}${RESET}"
   echo -n "\\r\\n"
   echo -n "${BOX_VERTICAL}"
   echo -n "\\r\\n"
@@ -70,12 +81,14 @@ function _bash_prompt_string {
 
 function _zsh_prompt_string {
   BRANCH="$(__git_branch)"
+  CHANGES="$(_shell_git_changes)"
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "%F{green}%n%F{reset} "
   echo -n "[${DISTRO_ICON} %m] "
   echo -n "%* "
   echo -n "%F{yellow}%~ "
-  echo -n "%F{cyan}${BRANCH}%F{reset}"
+  echo -n "%F{cyan}${BRANCH}%F{reset} "
+  echo -n "%F{blue}${CHANGES}%F{reset}"
   echo -n "\\r\\n"
   echo -n "${BOX_VERTICAL}"
   echo -n "\\r\\n"
