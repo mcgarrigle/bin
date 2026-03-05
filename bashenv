@@ -5,10 +5,11 @@
 export BACKUP_DESTINATION="s2:backup/${HOSTNAME}"
 
 path add ${HOME}/.local/share/venv/bin
-path add ${HOME}/.local/share/nvim-linux64/bin
+path add ${HOME}/.local/share/nvim/bin
 path add ${HOME}/.local/share/go/bin
 path add ${HOME}/projects/pyki
 path add ${HOME}/projects/fog
+path add ${HOME}/projects/hussh
 path add /usr/libexec
 
 context smol  ssh://node21.mac.wales
@@ -28,3 +29,5 @@ hypervisor wee  "$(libvirt_uri wee.mac.wales)"
 hypervisor dwt > /dev/null
 
 export CDPATH=~/projects/
+
+export HUSSH_URI="ssh://hussh.mac.wales:5555"
