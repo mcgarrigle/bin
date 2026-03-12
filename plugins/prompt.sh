@@ -85,10 +85,12 @@ function _zsh_prompt_string {
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "%F{green}%n%F{reset} "
   echo -n "[${DISTRO_ICON} %m] "
-  echo -n "%* "
+  # echo -n "%* "
   echo -n "%F{yellow}%~ "
-  echo -n "%F{cyan}${BRANCH}%F{reset} "
-  echo -n "%F{blue}${CHANGES}%F{reset}"
+  if [ -n $BRANCH ]; then
+    echo -n "%F{cyan}${BRANCH}%F{reset} "
+    echo -n "%F{blue}${CHANGES}%F{reset}"
+  fi
   echo -n "\\r\\n"
   echo -n "${BOX_VERTICAL}"
   echo -n "\\r\\n"
