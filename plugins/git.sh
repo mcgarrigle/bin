@@ -35,7 +35,7 @@ function fixup {
 
 function __git_branch {
   local BRANCH
-  BRANCH=$(git describe --contains --all HEAD 2> /dev/null)
+  BRANCH=$(git branch --show-current 2> /dev/null)
   if [ "$?" = "0" ]; then
     echo "(${BRANCH})"
   else

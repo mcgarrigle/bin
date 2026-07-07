@@ -68,7 +68,6 @@ function _bash_prompt_string {
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "${GREEN}\\u${RESET} "
   echo -n "[${DISTRO_ICON} \\h] "
-  echo -n "\\t "
   echo -n "${YELLOW}\\w "
   echo -n "${CYAN}${BRANCH}${RESET} "
   echo -n "${BLUE}${CHANGES}${RESET}"
@@ -85,7 +84,6 @@ function _zsh_prompt_string {
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "%F{green}%n%F{reset} "
   echo -n "[${DISTRO_ICON} %m] "
-  # echo -n "%* "
   echo -n "%F{yellow}%~ "
   if [ -n $BRANCH ]; then
     echo -n "%F{cyan}${BRANCH}%F{reset} "
