@@ -1,13 +1,20 @@
-#
+#!/usr/bin/env bash
+
 # invoke with:
 # curl -L bit.ly/shellin | bash
 
-yum install -y epel-release
-yum install -y vim git tmux bash-completion yum-utils
+sudo yum install -y epel-release
+sudo yum install -y vim git tmux bash-completion yum-utils
 
-git clone 'https://github.com/mcgarrigle/bin.git'
+cd ${HOME}
 
-echo -e '\n. $HOME/bin/bashrc\n' >> ~/.bashrc
+if [ -d "bin" ]; then
+  echo "bin exists ... skipping"
+else
+  git clone 'https://github.com/mcgarrigle/bin.git' "bin"
+fi
 
-ln -s bin/vimrc     .vimrc
-ln -s bin/tmux.conf .tmux.conf
+echo -e '\n. ${HOME}/bin/bashrc\n' >> ~/.bashrc
+
+ln -sf ${HOME}/bin/vimrc     .vimrc
+ln -sf ${HOME}/bin/tmux.conf .tmux.conf
