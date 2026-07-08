@@ -78,9 +78,25 @@ function _bash_prompt_string {
   echo -n "\\$ "  
 }
 
+function _bash_left_prompt_string {
+  echo -n "${GREEN}\\u${RESET} "
+  echo -n "[${DISTRO_ICON} \\h] "
+  echo -n "${YELLOW}\\w "
+  echo -n "\\$ "
+}
+
+function _bash_right_prompt_string {
+  BRANCH="$(__git_branch)"
+  CHANGES="$(_shell_git_changes)"
+
+  echo -n "${CYAN}${BRANCH}${RESET} "
+  echo -n "${BLUE}${CHANGES}${RESET}"
+}
+
 function _zsh_prompt_string {
   BRANCH="$(__git_branch)"
   CHANGES="$(_shell_git_changes)"
+
   echo -n "${BOX_DOWN_LEFT}${BOX_HORIZONTAL} "
   echo -n "%F{green}%n%F{reset} "
   echo -n "[${DISTRO_ICON} %m] "
@@ -111,7 +127,11 @@ _define_colours
 OS="$(_os_name)"
 DISTRO_ICON=$(_distro_icon "${OS}")
 
-PROMPT_COMMAND='PS1=$(_bash_prompt_string)'
+if [[ -n "${FLYLINE_ENABLED}" ]]; then
+  PROMPT_COMMAND='PS1=$(_bash_left_prompt_string); RPS1=$(_bash_right_prompt_string)'
+else
+  PROMPT_COMMAND='PS1=$(_bash_prompt_string)'
+fi
 
 function precmd {
   PROMPT=$(_zsh_prompt_string)

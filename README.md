@@ -11,7 +11,7 @@ or
 ```
 git clone https://github.com/mcgarrigle/bin.git
 
-echo 'source $HOME/bin/bashrc' >> ~/.bashrc
+bin/movein.sh
 
 # optional vim setup
 

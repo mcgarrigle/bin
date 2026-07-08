@@ -4,7 +4,7 @@
 # curl -L bit.ly/shellin | bash
 
 sudo yum install -y epel-release
-sudo yum install -y vim git tmux bash-completion yum-utils
+sudo yum install -y vim git tmux bash-completion yum-utils fastfetch
 
 cd ${HOME}
 
@@ -15,6 +15,9 @@ else
 fi
 
 echo -e '\n. ${HOME}/bin/bashrc\n' >> ~/.bashrc
+
+sudo cp ${HOME}/bin/motd.sh /etc/profile.d/
+sudo cp ${HOME}/bin/issue   /etc/
 
 ln -sf ${HOME}/bin/vimrc     .vimrc
 ln -sf ${HOME}/bin/tmux.conf .tmux.conf
