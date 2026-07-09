@@ -12,8 +12,10 @@ path add ${HOME}/projects/fog
 path add ${HOME}/projects/hussh
 path add /usr/libexec
 
-context smol  ssh://node21.mac.wales
-context wee   ssh://node1.mac.wales
+context dwt   ssh://dwt.mac.wales
+context smol  ssh://smol.mac.wales
+context wee   ssh://wee.mac.wales
+
 context node1 ssh://node1.mac.wales
 context node2 ssh://node2.mac.wales
 context node3 ssh://node3.mac.wales
@@ -31,3 +33,5 @@ hypervisor dwt > /dev/null
 export CDPATH=~/projects/
 
 export HUSSH_URI="ssh://hussh.mac.wales:5555"
+
+export FLYLINE_ENABLED=1

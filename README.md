@@ -1,4 +1,4 @@
-# shell
+# Repeatable BASH Environment
 
 All of my interactive shell-foo in one place so I don't forget any of it.
 
@@ -7,15 +7,25 @@ use:
 curl -L bit.ly/shellin | bash
 ```
 
-or
+or:
 ```
 git clone https://github.com/mcgarrigle/bin.git
 
 bin/movein.sh
 
-# optional vim setup
+```
 
-mkdir -p ~/.vim/pack/pete/start
-git clone https://github.com/vim-airline/vim-airline.git ~/.vim/pack/pete/start/airline
+## Flyline Integration
 
+See: https://github.com/HalFrgrd/flyline
+
+```
+
+# Install Flyline
+
+curl -sSfL https://github.com/HalFrgrd/flyline/releases/latest/download/install.sh | sh
+
+# Add to ~/.bashenv
+
+export FLYLINE_ENABLED=1
 ```
