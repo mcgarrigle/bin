@@ -1,0 +1,12 @@
+#!/bin/bash
+
+prog=$(basename $0)
+
+echo -n $prog
+for p in $@; do
+  if [[ $p == --* ]]; then
+    echo -ne "\n  $p"
+  else
+    echo -ne "  $p"
+  fi
+done

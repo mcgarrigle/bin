@@ -1,25 +1,21 @@
 THIS=$(realpath "${BASH_SOURCE}")
 HERE=$(dirname "${THIS}")
 
-function path {
-  if [ "$1" == "add" ]; then
-    export PATH=$2:$PATH
-  else
-    echo $PATH | tr ':' '\n'
-  fi
+function plugin {
+  source "${HERE}/plugins/$1.sh"
 }
 
-function include {
-  test -f "$1" && source "$1"
-}
+plugin bash
 
 path add "${HOME}/bin"
+
+for APP in git docker libvirt terraform; do
+  plugin "${APP}"
+done
 
 # get local environment
 
 export BASHENV="${HOME}/.bashenv"
 include "${BASHENV}"
 
-for APP in bash git prompt docker terraform libvirt; do
-  source "${HERE}/plugins/${APP}.sh"
-done
+plugin prompt
