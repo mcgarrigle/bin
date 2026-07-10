@@ -7,7 +7,7 @@ function plugin {
 
 plugin bash
 
-path add "${HOME}/bin"
+path add "${HOME}/bin/commands"
 
 for APP in git docker libvirt terraform; do
   plugin "${APP}"
