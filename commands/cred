@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import yaml
+from subprocess import run, PIPE
+
+def get_credentials():
+    with open(os.path.join(home, ".credentials")) as f:
+        return yaml.safe_load(f)
+
+def find(key):
+  password = credentials[key]
+  p = run("pbcopy", stdout=PIPE,
+        input=password, encoding='ascii')
+
+home = os.environ.get("HOME")
+credentials = get_credentials()
+
+if len(sys.argv) > 1:
+    find(sys.argv[1])
+else:
+    for name in credentials.keys():
+        print(name)

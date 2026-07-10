@@ -1,5 +1,5 @@
 export SHELL="/bin/zsh"
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin/commands:$PATH"
 export EDITOR=vim
 export CLICOLOR=1
 
@@ -58,3 +58,7 @@ done
 if [ "$(uname -s)" = "Darwin" ]; then
   eval $(brew shellenv)
 fi
+
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit && compinit -u
+
