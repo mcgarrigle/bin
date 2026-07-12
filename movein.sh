@@ -4,7 +4,7 @@
 # curl -L bit.ly/shellin | bash
 
 sudo yum install -y epel-release
-sudo yum install -y vim git tmux bash-completion yum-utils fastfetch
+sudo yum install -y vim git python3 tmux bash-completion tree yum-utils fastfetch curl util-linux-user
 
 cd ${HOME}
 
