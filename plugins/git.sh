@@ -1,8 +1,8 @@
 
 alias g='git'
 alias gs='git status'
-alias ga='git add'
-alias gaa='git add -A'
+# alias ga='git add'
+# alias gaa='git add -A'
 alias gb='git branch'
 alias gc='git commit -m'
 alias gf='git diff-tree --no-commit-id --name-status -r'
@@ -14,6 +14,16 @@ alias gl="git --no-pager log --pretty=format:'%C(bold)%h %ci %C(magenta)%ae %C(c
 alias gll="git --no-pager log --pretty=format:'%C(bold)%h %ci %C(magenta)%ae %C(cyan)%s%C(reset)' --abbrev-commit; echo"
 alias glt='git --no-pager log --pretty=oneline --abbrev-commit --max-count=20'
 alias gk="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
+
+function ga {
+  git add $@
+  git status
+}
+
+function gaa {
+  git add -A
+  git status
+}
 
 function gd {
   if [ -t 1 ]; then
