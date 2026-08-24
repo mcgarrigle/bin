@@ -1,7 +1,5 @@
 #!/bin/bash
 
-POOL="${POOL:-filesystems}"
-
 function command_ls {
   virsh list --all
 }
@@ -16,10 +14,8 @@ function command_info {
 }
 
 function command_rm {
-  virsh destroy "$1"
-  virsh undefine --nvram "$1"
-  virsh vol-delete --pool "${POOL}" --vol "$1.qcow2"
-  # virsh undefine --nvram --remove-all-storage "$1"
+  virsh destroy --domain "$1"
+  virsh undefine --domain "$1" --nvram --remove-all-storage
 }
 
 function command_help {
@@ -30,6 +26,8 @@ function command_help {
   echo "kvm vols          - list volumes in pool POOL"
   echo "kvm rm <name>     - delete domain and volume"
 }
+
+POOL="${POOL:-filesystems}"
 
 COMMAND="${1:-help}"
 shift
