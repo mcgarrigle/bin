@@ -45,6 +45,7 @@ function _distro_icon {
   case "$1" in
     alpine)   echo -n "${CYAN}$(utf8 f300)" ;;
     raspbian) echo -n "${RED}$(utf8 f315)" ;;
+    fedora)   echo -n "${CYAN}$(utf8 f30a)" ;;
     rocky)    echo -n "${GREEN}$(utf8 f32b)" ;;
     Linux)    echo -n "${YELLOW}$(utf8 f31a)" ;;
     Darwin)   echo -n "${WHITE}$(utf8 f302)" ;;
