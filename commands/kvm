@@ -4,6 +4,12 @@ function command_ls {
   virsh list --all
 }
 
+function command_copy {
+  FILE=$(basename "$1")
+  virsh vol-create-as --pool "${POOL}" --name "${FILE}" --capacity 1m
+  virsh vol-upload --pool "${POOL}" --vol "${FILE}" --file "$1"
+}
+
 function command_vols {
   virsh vol-list --pool "${POOL}"
 }
@@ -23,8 +29,9 @@ function command_help {
   echo
   echo "kvm ls            - list domains"
   echo "kvm info <name>   - get domain info"
-  echo "kvm vols          - list volumes in pool POOL"
-  echo "kvm rm <name>     - delete domain and volume"
+  echo "kvm copy <file>   - copy file as a new volume in pool \$POOL"
+  echo "kvm rm <name>     - delete domain and attached volumes"
+  echo "kvm vols          - list volumes in pool \$POOL"
 }
 
 POOL="${POOL:-filesystems}"
