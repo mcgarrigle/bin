@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+function install_eza {
+  curl https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz | tar xz
+  sudo chmod +x eza
+  sudo chown root:root eza
+  sudo mv eza /usr/local/bin/eza
+}
+
+source /etc/os-release
+
+sudo dnf install -y epel-release
+sudo dnf install -y vim git python3 curl wget tmux bash-completion tree yum-utils fastfetch util-linux-user bat
+
+if [ "${ID}" = "fedora" ]; then
+  sudo dnf install -y eza
+else
+  install_eza
+fi
+
+# alias ls='eza --icons'
+# alias cat=bat
