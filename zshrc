@@ -51,14 +51,14 @@ function contains {
   [ -z "${2##*$1*}" ]
 }
 
-for APP in git prompt; do
-  source "${HOME}/bin/plugins/${APP}.sh"
-done
+export OS=$(uname -s)
+export OS_PLUGIN="os_${OS:l}.zsh"
 
-if [ "$(uname -s)" = "Darwin" ]; then
-  eval $(brew shellenv)
-fi
+include "${HOME}/bin/plugins/${OS_PLUGIN}"
+
+for APP in git prompt; do
+  include "${HOME}/bin/plugins/${APP}.sh"
+done
 
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit && compinit -u
-
