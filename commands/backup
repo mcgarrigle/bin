@@ -1,7 +1,13 @@
 #!/bin/bash
 
+HOST=$(hostname -s)
+
+DESTINATION="s2:backup/${HOST}"
+
+DATE=$(date -I)
+
 rsync -avc \
   --exclude .Trash \
   --exclude Library \
   --exclude Desktop \
-  $HOME $BACKUP_DESTINATION
+  "${HOME}" "${DESTINATION}-${DATE}"
